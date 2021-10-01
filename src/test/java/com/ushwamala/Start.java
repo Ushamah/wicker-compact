@@ -28,7 +28,9 @@ public class Start
 	 */
 	public static void main(String[] args)
 	{
-		System.setProperty("wicket.configuration", "development");
+		//This can also be set in the VM-OPTIONS of the RUN CONFIGURATIONS
+		//-Dwicket.configuration=deployment
+		//System.setProperty("wicket.configuration", "development");
 
 		Server server = new Server();
 
