@@ -62,7 +62,6 @@
 			<artifactId>wicket-extensions</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
-		-->
 
 		<!-- LOGGING DEPENDENCIES - SLF4J-SIMPLE -->
 		<dependency>

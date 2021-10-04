@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:wicket="http://wicket.apache.org">
 <head>
-    <meta charset="UTF-8">
 </head>
 <body>
-
 <wicket:extend>
-    <h2>ARTICLES</h2>
+    <div class="row">
+        <div class="col-12">
+            <h1>Article</h1>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Valid From ab</th>
+                    <th>Valid To bis</th>
+                </tr>
+                <tr wicket:id="articles">
+                    <td wicket:id="name"></td>
+                    <td wicket:id="category"></td>
+                    <td wicket:id="description"></td>
+                    <td wicket:id="price"></td>
+                    <td>
+                        <img wicket:id="image" height="50px"/>
+                    </td>
+                    <td wicket:id="validFrom"></td>
+                    <td wicket:id="validTo"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </wicket:extend>
 </body>
 </html>

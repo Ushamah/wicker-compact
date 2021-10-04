@@ -6,13 +6,17 @@
 <body>
 <wicket:extend>
     <div class="container">
+        <wicket:child/>
         <div class="row">
-            <div class="col-xs-12">
-                <a wicket:id="backToDashboard">Back To Dashboard</a>
-            </div>
+           <ul class="pagination">
+               <li wicket:id="navigator" class="page-item">
+                   <a href="#" wicket:id="pageLink" class="page-link">
+                       <span wicket:id="pageNumber"></span>
+                   </a>
+               </li>
+           </ul>
         </div>
     </div>
-    <wicket:child/>
 </wicket:extend>
 </body>
 </html>

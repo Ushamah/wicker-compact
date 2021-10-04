@@ -1,11 +1,20 @@
 package com.ushwamala.pages;
 
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.navigation.paging.IPageable;
+import org.apache.wicket.markup.html.navigation.paging.PagingNavigation;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class BaseEntitiesPage extends BaseWebPage {
+public abstract class BaseEntitiesPage extends BaseWebPage {
     public BaseEntitiesPage(PageParameters parameters) {
         super(parameters);
-        add(new BookmarkablePageLink<Void>("backToDashboard", this.getApplication().getHomePage()));
     }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
+        final PagingNavigation navigator = new PagingNavigation("navigator", getPageable());
+        add(navigator);
+    }
+
+    protected abstract IPageable getPageable();
 }

@@ -8,25 +8,22 @@
 <body>
 <wicket:extend>
 
-    <div class="container">
-        <h1 class="categoriesHeader">CATEGORIES</h1>
-        <hr>
-       <!-- <ul class="list-group">
-            <li wicket:id="categories"></li>
-        </ul>-->
-        <table class="table">
-            <tr>
-                <th>Name</th>
-                <th>Image</th>
-            </tr>
-            <tr wicket:id="categories">
-                <td wicket:id="name">Name</td>
-                <td>
-                    <img wicket:id="image" height="100px"/>
-                </td>
-            </tr>
-        </table>
-        <div wicket:id="navigator"></div>
+    <div class="row">
+        <div class="col-12">
+            <h1>CATEGORIES</h1>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                </tr>
+                <tr wicket:id="categories">
+                    <td wicket:id="name">Name</td>
+                    <td>
+                        <img wicket:id="image" height="100px"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </wicket:extend>
 </body>
