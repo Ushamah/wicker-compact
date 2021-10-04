@@ -9,12 +9,14 @@ import com.ushwamala.services.ServiceRegistry;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.markup.repeater.RepeatingView;
+import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.markup.repeater.Item;
+import org.apache.wicket.markup.repeater.data.DataView;
+import org.apache.wicket.markup.repeater.data.IDataProvider;
+import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class CategoriesPage extends BaseEntitiesPage{
+public class CategoriesPage extends BaseEntitiesPage {
     public CategoriesPage(PageParameters parameters) {
         super(parameters);
     }
@@ -22,25 +24,31 @@ public class CategoriesPage extends BaseEntitiesPage{
     @Override
     protected void onInitialize() {
         super.onInitialize();
-            //Inject the CategoryService
-            CategoryService categoryService = ServiceRegistry.get(CategoryService.class);
-            //Get all the categories
-            final List<Category> categoryList = new ArrayList<>(categoryService.listAll());
-            //Create a ListView from the retrieved categories
-            final ListView<Category> categories = new ListView<>("categories", categoryList) {
-                //Implement the populateItem method
-                @Override
-                protected void populateItem(ListItem<Category> listItem) {
-                    //display the name of the category using a label
-                    listItem.add(new Label("name", listItem.getModelObject().getName()));
-                    //create an attributeAppender "src" and give it a value of listItem.getModelObject().getImageUrl()
-                    final AttributeAppender imgSrcAppender = new AttributeAppender(
-                            "src", listItem.getModelObject().getImageUrl()
-                    );
-                    //add the imgSr to the listItem
-                    listItem.add(new WebMarkupContainer("image").add(imgSrcAppender));
-                }
-            };
-            add(categories);
+        //Inject the CategoryService
+        CategoryService categoryService = ServiceRegistry.get(CategoryService.class);
+        //Get all the categoriesDataView
+        final List<Category> categoryList = new ArrayList<>(categoryService.listAll());
+        //create a data provider
+        final IDataProvider<Category> categoryDataProvider = new ListDataProvider<>(categoryList);
+        //Create a ListView from the retrieved categoriesDataView
+        final DataView<Category> categoriesDataView = new DataView<Category>("categories", categoryDataProvider) {
+            //Implement the populateItem method
+            protected void populateItem(Item<Category> item) {
+                //display the name of the category using a label
+                item.add(new Label("name", item.getModelObject().getName()));
+                //create an attributeAppender "src" and give it a value of item.getModelObject().getImageUrl()
+                final AttributeAppender imgSrcAppender = new AttributeAppender(
+                        "src", item.getModelObject().getImageUrl()
+                );
+                //add the imgSr to the item
+                item.add(new WebMarkupContainer("image").add(imgSrcAppender));
+            }
+        };
+        //set the number of categoriesDataView per page
+        categoriesDataView.setItemsPerPage(3);
+        //add a paging navigator
+        final PagingNavigator pagingNavigator = new PagingNavigator("navigator", categoriesDataView);
+        add(categoriesDataView);
+        add(pagingNavigator);
     }
 }
