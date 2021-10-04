@@ -26,7 +26,13 @@
                 </td>
             </tr>
         </table>
-        <div wicket:id="navigator"></div>
+        <ul class=" pagination">
+            <li wicket:id="navigator" class="page-item">
+                <a href="#" wicket:id="pageLink" class="page-link">
+                    <span wicket:id="pageNumber"></span>
+                </a>
+            </li>
+        </ul>
     </div>
 </wicket:extend>
 </body>
