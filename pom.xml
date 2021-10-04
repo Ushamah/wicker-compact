@@ -63,7 +63,7 @@
 			<version>${wicket.version}</version>
 		</dependency>
 
-		<!-- LOGGING DEPENDENCIES - SLF4J-SIMPLE -->
+		<!- LOGGING DEPENDENCIES - SLF4J-SIMPLE -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
