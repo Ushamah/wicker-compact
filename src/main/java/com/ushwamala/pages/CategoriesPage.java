@@ -15,6 +15,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
@@ -33,9 +34,9 @@ public class CategoriesPage extends BaseEntitiesPage {
         categoriesDataView = new DataView<>("categories", categoryDataProvider) {
             //Implement the populateItem method
             protected void populateItem(Item<Category> item) {
-                //display the name of the category using a label
-                final Category category = item.getModelObject();
-                item.add(new Label("name", LambdaModel.of(category::getName)));
+                Category category = item.getModelObject();
+                item.setModel(new CompoundPropertyModel<>(category));
+                item.add(new Label("name"));
                 //create an attributeAppender "src" and give it a value of item.getModelObject().getImageUrl()
                 final AttributeAppender imgSrcAppender = new AttributeAppender(
                         "src", LambdaModel.of(category::getImageUrl)
