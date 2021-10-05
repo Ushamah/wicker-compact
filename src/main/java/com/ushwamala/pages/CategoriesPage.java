@@ -15,7 +15,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.markup.repeater.data.ListDataProvider;
-import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class CategoriesPage extends BaseEntitiesPage {
@@ -35,10 +35,10 @@ public class CategoriesPage extends BaseEntitiesPage {
             protected void populateItem(Item<Category> item) {
                 //display the name of the category using a label
                 final Category category = item.getModelObject();
-                item.add(new Label("name", new PropertyModel<>(category,"name")));
+                item.add(new Label("name", LambdaModel.of(category::getName)));
                 //create an attributeAppender "src" and give it a value of item.getModelObject().getImageUrl()
                 final AttributeAppender imgSrcAppender = new AttributeAppender(
-                        "src", category.getImageUrl()
+                        "src", LambdaModel.of(category::getImageUrl)
                 );
                 //add the imgSr to the item
                 item.add(new WebMarkupContainer("image").add(imgSrcAppender));
